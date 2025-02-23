@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     ],
   },
 ], {
-  basename: '/todo-app' // Ensure this matches your repository name
+  basename: '/todo-app/' // Ensure this matches your repository name
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
