@@ -50,16 +50,16 @@ function SignUp() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `http://localhost:5173/todo`,
+        redirectTo: `https://repsacl.github.io/todo-app/todo`,
       },
     });
 
     if (error) {
       console.error('Error logging in with Google:', error.message);
     }
-    else{
-      navigate("/todo");
-    }
+    // else{
+    //   navigate("/todo");
+    // }
 
   }
   return (

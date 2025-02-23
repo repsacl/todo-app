@@ -9,8 +9,9 @@ function NavBar() {
 
   return (
     <nav className="flex items-center justify-between w-full p-4 border-b bg-rgb(240, 240, 240)">
-      <div className="text-gray-500 text-sm">TODO</div>
-      <Link to={"/"} className="absolute left-1/2 transform -translate-x-1/2">LOGO</Link>
+
+      <Link to={"/"} className="mx-2 justify-start">LOGO</Link>
+
       <ul className="flex md:space-x-6 space-x-4 md:text-lg text-sm font-medium md:px-6 px-1">
         {session ? (
           <Link to="/profile"><BTN className={"p-1 px-3 m-1 hover:text-black hover:bg-white"}>Profile</BTN></Link>

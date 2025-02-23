@@ -40,16 +40,16 @@ function Login() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `http://localhost:5173/todo`,
+        redirectTo: `https://repsacl.github.io/todo-app/todo`,
       },
     });
 
     if (error) {
       console.error('Error logging in with Google:', error.message);
     }
-    else{
-      navigate("/todo");
-    }
+    // else{
+    //   navigate("/todo");
+    // }
     // onAuthStateChange vil oppdatere session hvis login er vellykket
   };
 
@@ -137,7 +137,7 @@ function Login() {
             </div>
 
             <span className="ml-4">
-              Sign Up with Google
+              Login with Google
               </span>
           </button>
 
