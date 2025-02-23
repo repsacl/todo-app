@@ -13,7 +13,7 @@ import Wrapper from './Pages/Wrapper.jsx'
 
 import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
-import { AuthProvider } from './Hooks/auth'  // Importer AuthProvider
+import { AuthProvider } from './Hooks/auth'
 
 import './index.css'
 
@@ -57,7 +57,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-])
+], {
+  basename: '/todo-app' // Ensure this matches your repository name
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
