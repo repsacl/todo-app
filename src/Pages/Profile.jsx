@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../supabase-client"
 
+import { motion } from "motion/react";
+
 import Btn from "../Components/Button"
 import { useAuth } from "../Hooks/auth";
 
@@ -40,7 +42,7 @@ function Profile() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
+      <motion.div initial={{opacity: 0, scale: .9}} animate={{opacity: 1, scale: 1}} transition={{duration: .5, ease: 'easeInOut'}} className="flex flex-col justify-center items-center">
         {user ? (
           <>
             <h1 className="text-5xl mt-30 mb-3 text-center">Welcome <span className="text-blue-700">{user.full_name}</span></h1>
@@ -52,7 +54,7 @@ function Profile() {
           </>
         )}
         <Btn className={"p-1 px-3 m-1 hover:text-black hover:bg-white"} onClick={signOut}>Sign Out</Btn>
-      </div>
+      </motion.div>
     </>
   )
 }

@@ -1,9 +1,10 @@
+import { motion } from "motion/react"
 import Btn from "./Button"
 import '../App.css'
 
 const Card = ({todo, CompleteTask, DeleteTask}) => {
     return(
-    <li className='m-2 p-2 w-fit shadow-md shadow-black rounded-lg flex justify-between items-center bg-neutral-900 transition-all duration-300 hover:shadow-lg'>
+    <motion.li initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 1.2, ease: 'easeIn'}} exit={{opacity: 0}} className='m-2 p-2 w-fit shadow-md shadow-black rounded-lg flex justify-between items-center bg-neutral-900 transition-all duration-300 hover:shadow-lg'>
 
         <p>{todo.name}</p>
 
@@ -21,7 +22,7 @@ const Card = ({todo, CompleteTask, DeleteTask}) => {
             delete
           </span>
 
-      </li>
+      </motion.li>
     )
 }
   

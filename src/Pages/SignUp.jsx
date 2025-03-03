@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import supabase from '../../supabase-client';
 import { Link } from "react-router-dom";
 
+import { motion } from 'motion/react';
+
 import '../App.css';
 
 function SignUp() {
@@ -66,7 +68,7 @@ function SignUp() {
     <>
       <div className="bg-cover bg-center bg-fixed">
         <div className="h-200 flex justify-center items-center">
-          <div className="bg-neutral-900 mx-4 p-8 rounded shadow-xl w-full md:w-1/2 lg:w-1/3">
+          <motion.div initial={{opacity: 0, scale: .9}} animate={{opacity: 1, scale: 1}} transition={{duration: .5, ease: 'easeInOut'}} className="bg-neutral-900 mx-4 p-8 rounded shadow-xl w-full md:w-1/2 lg:w-1/3">
             <h1 className="text-3xl font-bold mb-8 text-center">Create an account</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -150,7 +152,7 @@ function SignUp() {
               </span>
           </button>
 
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

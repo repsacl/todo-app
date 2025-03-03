@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import supabase from '../../supabase-client'
 
-import Card from './ToDoCard'
-import Btn from "./Button"
+import { motion, AnimatePresence } from 'motion/react'
+
+import Card from '../Components/ToDoCard'
+import Btn from "../Components/Button"
 
 import '../App.css'
 
@@ -10,18 +12,16 @@ function ToDo() {
 
   const [todoList, setTodoList] = useState([])
   const [newTodo, setNewTodo] = useState("")
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchTodos()
   }, [])
 
   const fetchTodos = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-
     const {data, error} = await supabase
       .from("TodoList")
       .select("*")
-      .eq("user_id", user.id)
 
     if (error){
       console.log('error fetching todos', error)
@@ -29,17 +29,15 @@ function ToDo() {
     else {
       console.log('todos fetched', data)
       setTodoList(data)
+      setLoading(false)
     }
 
   }
 
   const addTodo = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-
     const newTodoData = {
       name: newTodo,
-      isCompleted: false,
-      user_id: user.id,
+      isCompleted: false
     }
 
     if (!newTodo){
@@ -65,13 +63,10 @@ function ToDo() {
 
 
   const CompleteTask = async (id, isComlete) => {
-    const { data: { user } } = await supabase.auth.getUser()
-
     const { data, error } = await supabase
       .from('TodoList')
       .update({ isCompleted: !isComlete })
       .eq("id",id)
-      .eq("user_id", user.id)
     
     if (error) {
       console.log('error toggling task', error)
@@ -84,13 +79,10 @@ function ToDo() {
   }
 
   const DeleteTask = async (id) => {
-    const { data: { user } } = await supabase.auth.getUser()
-
     const { data, error } = await supabase
       .from('TodoList')
       .delete()
       .eq("id", id)
-      .ep("user_id", user.id)
     
     if (error) {
       console.log('error deleting task', error)
@@ -104,7 +96,7 @@ function ToDo() {
   return (
     <>
       <div className='flex justify-center'>
-        <div className='flex flex-col justify-center p-1 w-2/3 min-h-100 mt-25 shadow-lg rounded-lg bg-neutral-800'>
+        <div className='flex flex-col justify-center p-1 w-2/3 min-h-100 shadow-lg rounded-lg bg-neutral-800'>
 
           <h1 className="text-5xl text-center">Todo List</h1>
 
@@ -121,6 +113,12 @@ function ToDo() {
           </div>
 
         <ul className='flex flex-wrap justify-center mt-5'>
+        { loading ? (
+            <h1 className="text-5xl text-center">Loading...</h1>
+        ):(
+        <>
+        <AnimatePresence>
+
           {todoList.map((todo) => (
             todo && (
               <Card
@@ -131,6 +129,10 @@ function ToDo() {
               />
             )
           ))}
+
+        </AnimatePresence>
+        </>
+        )}
         </ul>
         </div>
       </div>
